@@ -7,7 +7,7 @@ int	get_count(t_stack *s)
 
 	tmp = s->head;
 	count = 0;
-	while (tmp != s->p[s->top] && count <= 7)
+	while (tmp != s->p[s->top] && count < 10)
 	{
 		count++;
 		tmp = tmp->nxt;
@@ -26,10 +26,7 @@ long	normal_median(t_stack *s)
 
 	count = 0;
 	m[0] = s->head->n;
-	if (s->p[s->top])
-		m[1] = s->p[s->top]->n;
-	else
-		m[1] = s->end->n;
+	m[1] = (s->p[s->top]) ? s->p[s->top]->n : s->end->n;
 	tmp = s->head;
 	while (tmp != s->p[s->top])
 	{
@@ -49,143 +46,6 @@ long	normal_median(t_stack *s)
 	return (m[2]);
 }
 
-long	special_median_a(t_stack *a)
-{
-	t_pslst *tmp;
-	int arr[7];
-	int	i;
-	int j[2];
-
-	tmp = a->head;
-	i = 0;
-	while (tmp != a->p[a->top])
-	{
-		arr[i++] = tmp->n;
-		tmp = tmp->nxt;
-	}
-	j[0] = -1;
-	while (j[0]++ < i)
-	{
-		j[1] = j[0];
-		while (++j[1] < i)
-			if (arr[j[0]] < arr[j[1]])
-			{
-				arr[6] = arr[j[1]];
-				arr[j[1]] = arr[j[0]];
-				arr[j[0]] = arr[6];
-			}
-	}
-	return ((!a->p[a->top]) ? arr[3] : arr[2]);
-}
-
-int		deal_higher_a(t_stack *a, char *cmnds, int med, int count[3])
-{
-	int skips;
-	t_pslst *tmp;
-
-	skips = 0;
-	tmp = a->head;
-	while (tmp != a->p[a->top] && tmp->n > med)
-	{
-		skips++;
-		tmp = tmp->nxt;
-	}
-	if (tmp == a->p[a->top])
-		return (0);
-	count[0] += skips;
-	while (skips--)
-	{
-		rev_rotate(&a->head, &a->end);
-		ft_strcat(cmnds, "rra\n");
-		count[2] += 4;
-	}
-	return (1);
-}
-
-int		split_round_median_a(t_stack *a, t_stack *b, int med, char *cmnds)
-{
-	int		count[3];
-
-	count[0] = 0;
-	count[1] = 0;
-	count[2] = 0;
-	if (b->p[b->top])
-		ft_intdebug(b->p[b->top]->n, "bstack");
-	while (a->head->nxt != a->p[a->top])
-	{
-		if (a->head->n == med && count[1])
-			return (-1);
-		else if (a->head->n < med || (a->head->n == med && !count[1]++))
-		{
-			push(&a->head, &b->head, &b->end);
-			ft_strcat(cmnds, "pb\n");
-			count[2] += 3;
-		}
-		else if (!(deal_higher_a(a, cmnds, med, count)))
-			break ;
-	}
-	while (a->p[a->top] && --count[0] >= 0)
-	{
-		rotate(&a->head, &a->end);
-		ft_strcat(cmnds, "ra\n");
-		count[2] += 3;
-	}
-	b->p[++(b->top)] = b->head;
-	return (count[2]);
-}
-
-int three_case(t_stack *a, char *tmp)
-{
-	int i;
-
-	i = 0;
-	if (a->head->n == a->head->nxt->nxt->n || a->head->nxt->n == a->head->nxt->nxt->n)
-		return (-1);
-	while (1)
-	{
-		if (a->head->nxt->n < a->head->nxt->nxt->n && a->head->n < a->head->nxt->nxt->n)
-		{
-			if (a->head->nxt->n < a->head->n)
-			{
-				
-				swap(&a->head);
-				ft_strcat(tmp, "sa\n");
-				return (i + 3);
-			}
-			return (i);
-		}
-		if (a->head->nxt->n > a->head->nxt->nxt->n && a->head->nxt->n > a->head->n)
-		{
-			rotate(&a->head, &a->end);
-			ft_strcat(tmp, "ra\n");
-			i += 3;
-		}
-		else
-		{
-			rev_rotate(&a->head, &a->end);
-			ft_strcat(tmp, "rra\n");
-			i += 4;
-		}
-	}
-}
-int	sort_a(t_stack *a, int count, char *tmp)
-{
-	if (count == 1)
-		return (0);
-	if (a->head->n == a->head->nxt->n)
-		return (-1);
-	if (count == 2)
-	{
-		if (a->head->nxt->n < a->head->n)
-		{
-			swap(&a->head);
-			ft_strcat(tmp, "sa\n");
-			return (3);
-		}
-		return (0);	
-	}
-	return (three_case(a, tmp));
-}
 
 int	split_a(t_stack *a, t_stack *b, t_list **cmnd)
 {
@@ -198,10 +58,12 @@ int	split_a(t_stack *a, t_stack *b, t_list **cmnd)
 	tmp[0] = '\0';
 	count = get_count(a);
 	median = NO_MED;
-	if (count < 6 && count > 2)
+//	ft_intdebug(count, "count");
+	if (count <= 11 && count > 2)
 		median = special_median_a(a);
-	else if (count > 6)
+	else if (count > 11)
 		median = normal_median(a);
+//	ft_intdebug(median, "median");
 	if (median != NO_MED)
 		i = split_round_median_a(a, b, (int)median, tmp);
 	else
@@ -210,11 +72,62 @@ int	split_a(t_stack *a, t_stack *b, t_list **cmnd)
 		return (-1);
 	if (i)
 	{
-		tmp[i++] = '\0'; 
 		ft_lstaddend(cmnd, ft_lstnew((void *)tmp, i));
 	}
-//	ft_intdebug(median, "median");
-	print_stacks(a->head, b->head, "TURN");		
+	if (median == NO_MED)
+		a->p[++(a->top)] = a->head;
+	ft_printf("%s\n", tmp);
+	print_stacks(a->head, b->head, "start");		
+	return ((median == NO_MED) ? 1 : 0);
+}
+
+int	push_b(t_stack *b, t_stack *a, int count, char *tmp)
+{
+	int i;
+	int	ret;
+
+	ret = 0;
+	i = 0;
+	count = (count == -1) ? 3 : count;
+	while (i++ < count)
+	{
+		push(&b->head, &a->head, &a->end);
+		ft_strcat(tmp, "pa\n");
+		ret += 3;
+	}
+	return (ret);
+}
+
+int	b_to_a(t_stack *a, t_stack *b, t_list **cmnd)
+{
+	int		count;
+	long	median;
+	char	tmp[a->ac * 4];
+	int		i;
+
+	i = 0;
+	tmp[0] = '\0';
+	count = get_count(b);
+	median = NO_MED;
+	if (count < 6 && count > 2)
+		median = special_median_b(b);
+	else if (count >= 6)
+		median = normal_median(b);
+	if (median != NO_MED)
+		i = split_round_median_b(a, b, (int)median, tmp);
+	else
+		i = sort_b(b, count, tmp);
+	if (i == -1)
+		return (-1);
+	if (median == NO_MED)
+		i += push_b(b, a, count, tmp);
+	if (i)
+	{
+		//tmp[i++] = '\0'; 
+		ft_lstaddend(cmnd, ft_lstnew((void *)tmp, i));
+	}
+	ft_printf("%s\n", tmp);
+	print_stacks(a->head, b->head, "start");		
 	return ((median == NO_MED) ? 1 : 0);
 }
 
@@ -235,63 +148,19 @@ int	sorted(t_stack *a)
 t_list *solver(t_stack *a, t_stack *b)
 {
 	t_list *cmnd;
-	int	sort;
+	int	ret;
 
-	sort = 0;	
 	cmnd = ft_lstnew((void *)"\0", 1);
-//	if (!(sort = sorted(a)))
-	while (split_a(a, b, &cmnd) == 0)
+	while (b->head != NULL || !sorted(a))
+	{
+		while ((ret = split_a(a, b, &cmnd)) == 0)
 			;
-//	split_a(a, b, &cmnd);
-	if (sort == -1)
-		exit(1);
-//	while (b->head != NULL && !sort)
-//	{
-		/*get_count, if count over 6, split with normal median, if under 6, split with special median, if 2 or under, skip split, 
-		A:
-		solve = 0;
-		while (!solve_a(a, b))
-		solve(a, b)
-		{
-			count = get_count_a;
-			median = NULL;
-			if (count < 6 && count > 2)
-				median = spesh_med;
-			else if (count > 6)
-				median = norm_med;
-		}
-		if (median)
-			split_at_median;
-		else
-		{
-			solve(a, count);
-			set_new_pa;
-			i++;
-			return (1);
-		}
-		b_back_to_a(b, a, ba, pa);
-		fun
-		{
-			
-
-
-		}
-		
-		
-
-		if (under_six(a, pa))
-		{
-
-			median = get_median(a);
-			if (median)
-		// sort a and create new pa[]
-		}
-		// else median = normal method
-		*/
-//	}
+		if (ret == -1)
+			exit(1);
+		b_to_a(a, b, &cmnd);
+	}
 	return (cmnd);
 }
-
 
 int	main(int ac, char **av)
 {

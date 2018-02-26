@@ -3,7 +3,7 @@
 long	special_median_a(t_stack *a)
 {
 	t_pslst *tmp;
-	int arr[7];
+	int arr[12];
 	int	i;
 	int j[2];
 
@@ -21,9 +21,9 @@ long	special_median_a(t_stack *a)
 		while (++j[1] < i)
 			if (arr[j[0]] < arr[j[1]])
 			{
-				arr[6] = arr[j[1]];
+				arr[11] = arr[j[1]];
 				arr[j[1]] = arr[j[0]];
-				arr[j[0]] = arr[6];
+				arr[j[0]] = arr[11];
 			}
 	}
 	return ((!a->p[a->top]) ? arr[3] : arr[2]);
@@ -60,13 +60,13 @@ int		split_round_median_a(t_stack *a, t_stack *b, int med, char *cmnds)
 	count[0] = 0;
 	count[1] = 0;
 	count[2] = 0;
-	if (b->p[b->top])
-		ft_intdebug(b->p[b->top]->n, "bstack");
-	while (a->head->nxt != a->p[a->top])
+	if (b->head)
+		b->p[++(b->top)] = b->head;
+	while (a->head != a->p[a->top])
 	{
-		if (a->head->n == med && count[1])
-			return (-1);
-		else if (a->head->n < med || (a->head->n == med && !count[1]++))
+//		if (a->head->n == med && count[1])
+//			return (-1);
+		if (a->head->n <= med)
 		{
 			push(&a->head, &b->head, &b->end);
 			ft_strcat(cmnds, "pb\n");
@@ -81,7 +81,6 @@ int		split_round_median_a(t_stack *a, t_stack *b, int med, char *cmnds)
 		ft_strcat(cmnds, "ra\n");
 		count[2] += 3;
 	}
-	b->p[++(b->top)] = b->head;
 	return (count[2]);
 }
 
@@ -119,6 +118,7 @@ int three_case(t_stack *a, char *tmp)
 		}
 	}
 }
+
 int	sort_a(t_stack *a, int count, char *tmp)
 {
 	if (count == 1)
