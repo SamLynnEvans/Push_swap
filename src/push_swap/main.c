@@ -7,7 +7,7 @@ int	get_count(t_stack *s)
 
 	tmp = s->head;
 	count = 0;
-	while (tmp != s->p[s->top] && count < 10)
+	while (tmp != s->p[s->top] && count < 12)
 	{
 		count++;
 		tmp = tmp->nxt;
@@ -177,7 +177,7 @@ int	main(int ac, char **av)
 	b.top = 0;
 	a.p[a.top] = NULL;
 	b.p[a.top] = NULL;
-	print_stacks(a.head, b.head, "start");		
+//	print_stacks(a.head, b.head, "start");
 	cmnd = solver(&a, &b);
 	while (cmnd != NULL)
 	{
