@@ -1,5 +1,6 @@
 #ifndef PUSH_SWAP_H
 #define PUSH_SWAP_H
+#define NO_MED 2147483648
 
 #include "libft.h"
 #include "ft_printf.h"
