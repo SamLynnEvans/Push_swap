@@ -26,7 +26,7 @@ long	special_median_b(t_stack *b)
 				arr[j[0]] = arr[6];
 			}
 	}
-	return ((!b->p[b->top]) ? arr[3] : arr[2]);
+	return ((!b->p[b->top]) ? arr[2] : arr[1]);
 }
 
 int		deal_lower_b(t_stack *b, char *cmnds, int med, int count[3])
@@ -36,7 +36,7 @@ int		deal_lower_b(t_stack *b, char *cmnds, int med, int count[3])
 
 	skips = 0;
 	tmp = b->head;
-	while (tmp != b->p[b->top] && tmp->n < med)
+	while (tmp != b->p[b->top] && tmp->n <= med)
 	{
 		skips++;
 		tmp = tmp->nxt;
@@ -62,9 +62,7 @@ int		split_round_median_b(t_stack *a, t_stack *b, int med, char *cmnds)
 	count[2] = 0;
 	while (b->head != b->p[b->top])
 	{
-		if (b->head->n == med && count[1])
-			return (-1);
-		else if (b->head->n > med || (b->head->n == med && !count[1]++))
+		if (b->head->n > med)
 		{
 			push(&b->head, &a->head, &a->end);
 			ft_strcat(cmnds, "pa\n");
