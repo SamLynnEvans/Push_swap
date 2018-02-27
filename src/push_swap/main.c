@@ -70,14 +70,14 @@ int	split_a(t_stack *a, t_stack *b, t_list **cmnd)
 		i = sort_a(a, count, tmp);
 	if (i == -1)
 		return (-1);
-	if (i)
+	if (i++)
 	{
 		ft_lstaddend(cmnd, ft_lstnew((void *)tmp, i));
 	}
 	if (median == NO_MED)
 		a->p[++(a->top)] = a->head;
-	ft_printf("%s\n", tmp);
-	print_stacks(a->head, b->head, "start");		
+//	ft_printf("%s\n", tmp);
+//	print_stacks(a->head, b->head, "start");		
 	return ((median == NO_MED) ? 1 : 0);
 }
 
@@ -109,9 +109,9 @@ int	b_to_a(t_stack *a, t_stack *b, t_list **cmnd)
 	tmp[0] = '\0';
 	count = get_count(b);
 	median = NO_MED;
-	if (count < 6 && count > 2)
+	if (count <= 6 && count > 2)
 		median = special_median_b(b);
-	else if (count >= 6)
+	else if (count > 6)
 		median = normal_median(b);
 	if (median != NO_MED)
 		i = split_round_median_b(a, b, (int)median, tmp);
@@ -121,13 +121,13 @@ int	b_to_a(t_stack *a, t_stack *b, t_list **cmnd)
 		return (-1);
 	if (median == NO_MED)
 		i += push_b(b, a, count, tmp);
-	if (i)
+	if (i++)
 	{
 		//tmp[i++] = '\0'; 
 		ft_lstaddend(cmnd, ft_lstnew((void *)tmp, i));
 	}
-	ft_printf("%s\n", tmp);
-	print_stacks(a->head, b->head, "start");		
+//	ft_printf("%s\n", tmp);
+//	print_stacks(a->head, b->head, "start");		
 	return ((median == NO_MED) ? 1 : 0);
 }
 
