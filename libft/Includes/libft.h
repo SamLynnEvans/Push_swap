@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 11:52:39 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/01 12:42:40 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/03/01 18:08:06 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct		s_list
 }					t_list;
 
 int					ft_abs(int num);
+long				ft_atol(const char *s);
 t_list				*ft_lstnew_str(char *content);
 char				**ft_add_charpointer(char **arr, char *content, int count);
 void				ft_put_inta(int *arr, int len);

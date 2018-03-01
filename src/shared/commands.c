@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   commands.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/03/01 18:27:55 by slynn-ev          #+#    #+#             */
+/*   Updated: 2018/03/01 18:28:33 by slynn-ev         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	print_stacks(t_pslst *a, t_pslst *b, char *line)
@@ -19,10 +31,9 @@ void	print_stacks(t_pslst *a, t_pslst *b, char *line)
 		tmp = tmp->nxt;
 	}
 	ft_putchar('\n');
-}	
+}
 
-
-void 	push(t_pslst **from, t_pslst **to, t_pslst **to_end)
+void	push(t_pslst **from, t_pslst **to, t_pslst **to_end)
 {
 	t_pslst *tmp;
 
@@ -65,7 +76,6 @@ void	rev_rotate(t_pslst **head, t_pslst **end)
 	(*head)->prv = NULL;
 	*end = (*end)->nxt;
 	(*end)->nxt = NULL;
-
 }
 
 void	rotate(t_pslst **head, t_pslst **end)

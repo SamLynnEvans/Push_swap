@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 14:23:38 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/01 14:23:40 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/03/01 18:08:41 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	sort_b(t_stack *b, int count, char *tmp)
 {
 	if (b->top)
 		b->top--;
-	if (count == 1)
+	if (count == 1 || !count)
 		return ;
 	if (b->head->n == b->head->nxt->n)
 		error_exit();

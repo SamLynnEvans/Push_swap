@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 16:21:08 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/01 16:38:15 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/03/01 18:27:26 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ int		check_only_number(int ac, char **av)
 int		check_doubles(t_stack *a, int ac)
 {
 	t_pslst *tmp;
-	int	i;
-	int j;
-	int	k;
-	int arr[ac + 1];
+	int		i;
+	int		j;
+	int		k;
+	int		arr[ac + 1];
 
 	tmp = a->head;
 	i = 0;
@@ -66,14 +66,18 @@ int		check_doubles(t_stack *a, int ac)
 	return (1);
 }
 
-void	lst_addend_fast(int n, t_pslst **back)
+void	lst_addend_fast(char *str, t_pslst **back)
 {
 	t_pslst *tmp;
+	long	num;
 
+	num = ft_atol(str);
+	if (num > INT_MAX || num < INT_MIN)
+		error_exit();
 	if (*back == NULL)
 		return ;
 	tmp = malloc(sizeof(t_pslst));
-	tmp->n = n;
+	tmp->n = (int)num;
 	tmp->nxt = NULL;
 	(*back)->nxt = tmp;
 	tmp->prv = *back;
@@ -86,16 +90,13 @@ void	build_stack(t_stack *a, t_stack *b, char **av, int ac)
 	t_pslst *tmp;
 
 	i = 1;
-	if (!check_only_number(ac, av))
+	if (!check_only_number(ac, av) || !(a->head = malloc(sizeof(t_pslst))))
 		error_exit();
-	if (ac < 2)
-		exit(1);
-	a->head = malloc(sizeof(t_pslst));
 	a->head->n = ft_atoi(av[i++]);
 	a->head->prv = NULL;
 	a->end = a->head;
 	while (i < ac)
-		lst_addend_fast(ft_atoi(av[i++]), &a->end);
+		lst_addend_fast(av[i++], &a->end);
 	if (!check_doubles(a, ac))
 	{
 		while (a->head)
@@ -108,4 +109,4 @@ void	build_stack(t_stack *a, t_stack *b, char **av, int ac)
 	}
 	b->head = NULL;
 	b->end = NULL;
-} 
+}

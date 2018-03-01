@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 13:52:50 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/01 14:05:03 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/03/01 18:28:40 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,33 @@ int	split_a(t_stack *a, t_stack *b, t_list **cmnd)
 	return ((median == NO_MED) ? 1 : 0);
 }
 
-int	push_b(t_stack *b, t_stack *a, int count, char *tmp)
+int	sorted(t_stack *a)
+{
+	t_pslst	*tmp;
+
+	tmp = a->head;
+	while (tmp)
+	{
+		if (tmp->nxt && tmp->nxt->n < tmp->n)
+			return (0);
+		tmp = tmp->nxt;
+		if (tmp == a->p[a->top])
+			break ;
+	}
+	return (1);
+}
+
+void	push_b(t_stack *b, t_stack *a, int count, char *tmp)
 {
 	int i;
-	int	ret;
 
-	ret = 0;
 	i = 0;
 	count = (count == -1) ? 3 : count;
 	while (i++ < count)
 	{
 		push(&b->head, &a->head, &a->end);
 		ft_strcat(tmp, "pa\n");
-		ret += 3;
 	}
-	return (ret);
 }
 
 void	b_to_a(t_stack *a, t_stack *b, t_list **cmnd)
@@ -74,19 +86,6 @@ void	b_to_a(t_stack *a, t_stack *b, t_list **cmnd)
 	ft_lstaddend(cmnd, ft_lstnew_str(tmp));
 }
 
-int	sorted(t_stack *a)
-{
-	t_pslst	*tmp;
-
-	tmp = a->head;
-	while (tmp->nxt != a->p[a->top])
-	{
-		if (tmp->nxt->n < tmp->n)
-			return (0);
-		tmp = tmp->nxt; 
-	}
-	return (1);
-}
 
 t_list *solver(t_stack *a, t_stack *b)
 {
