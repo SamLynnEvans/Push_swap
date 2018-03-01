@@ -86,9 +86,9 @@ int	split_a(t_stack *a, t_stack *b, t_list **cmnd)
 	tmp[0] = '\0';
 	count = get_count(a);
 	median = NO_MED;
-	if (count <= 6 && count > 2)
+	if (count <= 11 && count > 2)
 		median = special_median_a(a);
-	else if (count > 6)
+	else if (count > 11)
 		median = get_true_median(a);
 	if (median != NO_MED)
 		i = split_round_median_a(a, b, (int)median, tmp);
@@ -150,7 +150,7 @@ int	b_to_a(t_stack *a, t_stack *b, t_list **cmnd)
 	if (i++)
 	{
 		//tmp[i++] = '\0'; 
-		ft_lstaddend(cmnd, ft_lstnew((void *)tmp, i));
+		ft_lstaddend(cmnd, ft_lstnew_str(tmp));
 	}
 //	ft_printf("%s\n", tmp);
 //	print_stacks(a->head, b->head, "start");		

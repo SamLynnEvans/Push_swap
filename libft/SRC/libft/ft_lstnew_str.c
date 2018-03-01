@@ -1,38 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew_str.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/05 10:37:32 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/01 12:35:10 by slynn-ev         ###   ########.fr       */
+/*   Created: 2018/03/01 12:35:28 by slynn-ev          #+#    #+#             */
+/*   Updated: 2018/03/01 12:46:20 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	*ft_memdup(void const *content, size_t n)
-{
-	unsigned long	i;
-	char			*b;
-	char			*a;
-
-	a = (char *)content;
-	if (!(b = (char *)malloc(sizeof(char) * n)))
-		return (NULL);
-	i = 0;
-	while (i < n)
-	{
-		b[i] = a[i];
-		i++;
-	}
-	return ((void *)b);
-}
-
-t_list		*ft_lstnew(void const *content, size_t content_size)
+t_list		*ft_lstnew_str(char *content)
 {
 	t_list *tmp;
+	int		i;
+	char	*arr;
 
 	if (!(tmp = (t_list *)malloc(sizeof(t_list))))
 		return (NULL);
@@ -43,8 +27,15 @@ t_list		*ft_lstnew(void const *content, size_t content_size)
 		tmp->next = NULL;
 		return (tmp);
 	}
-	tmp->content = ft_memdup(content, content_size);
-	tmp->content_size = content_size;
+	arr = malloc(sizeof(char) * ft_strlen(content) + 1);
+	i = 0;
+	while (content[i])
+	{
+		arr[i] = content[i];
+		i++;
+	}
+	arr[i] = '\0';
+	tmp->content = (void *)arr;
 	tmp->next = NULL;
 	return (tmp);
 }

@@ -48,6 +48,7 @@ $(NAME_P) : $(P_OBJ)
 $(OBJ_PATH)/%.o : $(SRC_PATH)/%.c
 	@mkdir -p $(OBJ_PATH)
 	@mkdir -p $(dir $(P_OBJ))
+	@mkdir -p $(dir $(CH_OBJ))
 	gcc -o $@ -c $< $(INCLUDES) $(FLAGS)
 
 clean :
