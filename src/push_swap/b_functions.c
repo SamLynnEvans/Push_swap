@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 14:23:38 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/01 19:22:16 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/03/01 20:05:37 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,6 @@ void	split_round_median_b(t_stack *a, t_stack *b, int med, char *cmnds)
 
 void	three_caseb(t_stack *a, char *tmp)
 {
-	if (a->head->n == a->head->nxt->nxt->n
-	|| a->head->nxt->n == a->head->nxt->nxt->n)
-		error_exit();
 	while (!(a->head->nxt->n > a->head->nxt->nxt->n
 	&& a->head->n > a->head->nxt->nxt->n))
 	{
@@ -119,8 +116,6 @@ void	sort_b(t_stack *b, int count, char *tmp)
 		b->top--;
 	if (count == 1 || !count)
 		return ;
-	if (b->head->n == b->head->nxt->n)
-		error_exit();
 	if (count == 2)
 	{
 		if (b->head->nxt->n > b->head->n)

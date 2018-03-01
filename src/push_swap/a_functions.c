@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 18:58:34 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/01 19:11:50 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/03/01 20:05:11 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ long	special_median_a(t_stack *a)
 	return ((!a->p[a->top]) ? arr[3] : arr[2]);
 }
 
-int		deal_higher_a(t_stack *a, char *cmnds, int med, int count[2])
+int		deal_higher_a(t_stack *a, char *cmnds, int med, int *t_rewind)
 {
 	int		skips;
 	t_pslst	*tmp;
@@ -55,7 +55,7 @@ int		deal_higher_a(t_stack *a, char *cmnds, int med, int count[2])
 	}
 	if (tmp == a->p[a->top])
 		return (0);
-	count[0] += skips;
+	*t_rewind = *t_rewind + skips;
 	while (skips--)
 	{
 		rev_rotate(&a->head, &a->end);
@@ -66,10 +66,9 @@ int		deal_higher_a(t_stack *a, char *cmnds, int med, int count[2])
 
 void	split_round_median_a(t_stack *a, t_stack *b, int med, char *cmnds)
 {
-	int		count[2];
+	int		rewind;
 
-	count[0] = 0;
-	count[1] = 0;
+	rewind = 0;
 	if (b->head)
 		b->p[++(b->top)] = b->head;
 	while (a->head != a->p[a->top])
@@ -79,10 +78,10 @@ void	split_round_median_a(t_stack *a, t_stack *b, int med, char *cmnds)
 			push(&a->head, &b->head, &b->end);
 			ft_strcat(cmnds, "pb\n");
 		}
-		else if (!(deal_higher_a(a, cmnds, med, count)))
+		else if (!(deal_higher_a(a, cmnds, med, &rewind)))
 			break ;
 	}
-	while (a->p[a->top] && --count[0] >= 0)
+	while (a->p[a->top] && --rewind >= 0)
 	{
 		rotate(&a->head, &a->end);
 		ft_strcat(cmnds, "ra\n");
@@ -91,9 +90,6 @@ void	split_round_median_a(t_stack *a, t_stack *b, int med, char *cmnds)
 
 void	three_case(t_stack *a, char *tmp)
 {
-	if (a->head->n == a->head->nxt->nxt->n
-	|| a->head->nxt->n == a->head->nxt->nxt->n)
-		exit(1);
 	while (!(a->head->nxt->n < a->head->nxt->nxt->n
 	&& a->head->n < a->head->nxt->nxt->n))
 	{
@@ -119,8 +115,6 @@ void	sort_a(t_stack *a, int count, char *tmp)
 {
 	if (count == 1)
 		return ;
-	if (a->head->n == a->head->nxt->n)
-		error_exit();
 	if (count == 2)
 	{
 		if (a->head->nxt->n < a->head->n)
