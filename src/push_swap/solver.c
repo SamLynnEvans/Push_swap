@@ -90,10 +90,9 @@ t_list	*solver(t_stack *a, t_stack *b)
 {
 	t_list	*cmnd;
 	int		ret;
-	int		sort;
 
 	cmnd = ft_lstnew((void *)"\0", 1);
-	while (!(sort = sorted(a)) || b->head != NULL)
+	while (b->head != NULL || !sorted(a))
 	{
 		while ((ret = split_a(a, b, &cmnd)) == 0)
 			;
