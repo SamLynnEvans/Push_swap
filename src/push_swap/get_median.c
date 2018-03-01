@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 14:07:00 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/01 14:07:25 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/03/01 18:41:25 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ int	get_count(t_stack *s)
 
 int	get_true_median(t_stack *a)
 {
-	t_pslst *tmp;
-	int arr[a->ac + 1];
-	int	i;
-	int j[2];
+	t_pslst	*tmp;
+	int		arr[a->ac + 1];
+	int		i;
+	int		j[2];
 
 	tmp = a->head;
 	i = 0;
@@ -57,4 +57,3 @@ int	get_true_median(t_stack *a)
 	}
 	return (arr[i / 2]);
 }
-

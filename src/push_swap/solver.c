@@ -6,13 +6,13 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 13:52:50 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/01 18:28:40 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/03/01 18:45:41 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	split_a(t_stack *a, t_stack *b, t_list **cmnd)
+int		split_a(t_stack *a, t_stack *b, t_list **cmnd)
 {
 	int		count;
 	long	median;
@@ -35,7 +35,7 @@ int	split_a(t_stack *a, t_stack *b, t_list **cmnd)
 	return ((median == NO_MED) ? 1 : 0);
 }
 
-int	sorted(t_stack *a)
+int		sorted(t_stack *a)
 {
 	t_pslst	*tmp;
 
@@ -86,12 +86,11 @@ void	b_to_a(t_stack *a, t_stack *b, t_list **cmnd)
 	ft_lstaddend(cmnd, ft_lstnew_str(tmp));
 }
 
-
-t_list *solver(t_stack *a, t_stack *b)
+t_list	*solver(t_stack *a, t_stack *b)
 {
-	t_list *cmnd;
-	int	ret;
-	int	sort;
+	t_list	*cmnd;
+	int		ret;
+	int		sort;
 
 	cmnd = ft_lstnew((void *)"\0", 1);
 	while (!(sort = sorted(a)) || b->head != NULL)

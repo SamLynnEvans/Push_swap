@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   a_functions.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/03/01 18:58:34 by slynn-ev          #+#    #+#             */
+/*   Updated: 2018/03/01 19:07:38 by slynn-ev         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 long	special_median_a(t_stack *a)
 {
-	t_pslst *tmp;
-	int arr[12];
-	int	i;
-	int j[2];
+	t_pslst	*tmp;
+	int		arr[12];
+	int		i;
+	int		j[2];
 
 	tmp = a->head;
 	i = 0;
@@ -29,10 +41,10 @@ long	special_median_a(t_stack *a)
 	return ((!a->p[a->top]) ? arr[3] : arr[2]);
 }
 
-int	deal_higher_a(t_stack *a, char *cmnds, int med, int count[2])
+int		deal_higher_a(t_stack *a, char *cmnds, int med, int count[2])
 {
-	int skips;
-	t_pslst *tmp;
+	int		skips;
+	t_pslst	*tmp;
 
 	skips = 0;
 	tmp = a->head;
@@ -77,25 +89,16 @@ void	split_round_median_a(t_stack *a, t_stack *b, int med, char *cmnds)
 	}
 }
 
-static void	three_case(t_stack *a, char *tmp)
+void	three_case(t_stack *a, char *tmp)
 {
-	int i;
-
-	i = 0;
-	if (a->head->n == a->head->nxt->nxt->n || a->head->nxt->n == a->head->nxt->nxt->n)
+	if (a->head->n == a->head->nxt->nxt->n
+	|| a->head->nxt->n == a->head->nxt->nxt->n)
 		exit(1);
-	while (1)
+	while (!(a->head->nxt->n < a->head->nxt->nxt->n
+	&& a->head->n < a->head->nxt->nxt->n))
 	{
-		if (a->head->nxt->n < a->head->nxt->nxt->n && a->head->n < a->head->nxt->nxt->n)
-		{
-			if (a->head->nxt->n < a->head->n)
-			{		
-				swap(&a->head);
-				ft_strcat(tmp, "sa\n");
-			}
-			return ;
-		}
-		if (a->head->nxt->n > a->head->nxt->nxt->n && a->head->nxt->n > a->head->n)
+		if (a->head->nxt->n > a->head->nxt->nxt->n
+		&& a->head->nxt->n > a->head->n)
 		{
 			rotate(&a->head, &a->end);
 			ft_strcat(tmp, "ra\n");
@@ -106,6 +109,10 @@ static void	three_case(t_stack *a, char *tmp)
 			ft_strcat(tmp, "rra\n");
 		}
 	}
+	if (!(a->head->nxt->n < a->head->n))
+		return ;	
+	swap(&a->head);
+	ft_strcat(tmp, "sa\n");
 }
 
 void	sort_a(t_stack *a, int count, char *tmp)

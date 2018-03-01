@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 17:33:22 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/01 17:34:05 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/03/01 18:38:00 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	rotater(char *line, t_stack *a, t_stack *b)
 		rotate(&a->head, &a->end);
 		return ;
 	}
- 	if (!ft_strcmp(line, "rb"))
+	if (!ft_strcmp(line, "rb"))
 	{
 		rotate(&b->head, &b->end);
 		return ;
@@ -51,7 +51,7 @@ void	rev_rotater(char *line, t_stack *a, t_stack *b)
 		rev_rotate(&a->head, &a->end);
 		return ;
 	}
- 	if (!ft_strcmp(line, "rrb"))
+	if (!ft_strcmp(line, "rrb"))
 	{
 		rev_rotate(&b->head, &b->end);
 		return ;

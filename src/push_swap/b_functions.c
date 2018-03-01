@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 14:23:38 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/01 18:08:41 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/03/01 19:09:52 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,20 +89,14 @@ void	split_round_median_b(t_stack *a, t_stack *b, int med, char *cmnds)
 
 static void three_case(t_stack *a, char *tmp)
 {
-	if (a->head->n == a->head->nxt->nxt->n || a->head->nxt->n == a->head->nxt->nxt->n)
+	if (a->head->n == a->head->nxt->nxt->n
+	|| a->head->nxt->n == a->head->nxt->nxt->n)
 		error_exit();
-	while (1)
+	while (!(a->head->nxt->n > a->head->nxt->nxt->n
+	&& a->head->n > a->head->nxt->nxt->n))
 	{
-		if (a->head->nxt->n > a->head->nxt->nxt->n && a->head->n > a->head->nxt->nxt->n)
-		{
-			if (a->head->nxt->n > a->head->n)
-			{
-				swap(&a->head);
-				ft_strcat(tmp, "sb\n");
-			}
-			return ;
-		}
-		if (a->head->nxt->n < a->head->nxt->nxt->n && a->head->nxt->n < a->head->n)
+		if (a->head->nxt->n < a->head->nxt->nxt->n
+		&& a->head->nxt->n < a->head->n)
 		{
 			rotate(&a->head, &a->end);
 			ft_strcat(tmp, "rb\n");
@@ -113,6 +107,10 @@ static void three_case(t_stack *a, char *tmp)
 			ft_strcat(tmp, "rrb\n");
 		}
 	}
+	if (!(a->head->nxt->n > a->head->n))
+				return ;
+	swap(&a->head);
+	ft_strcat(tmp, "sb\n");
 }
 
 void	sort_b(t_stack *b, int count, char *tmp)

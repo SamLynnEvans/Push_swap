@@ -6,16 +6,16 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 17:35:20 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/01 17:44:41 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/03/01 18:32:27 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	print_exit(t_stack *a, t_stack *b, int OK)
+void	print_exit(t_stack *a, t_stack *b, int ok)
 {
 	t_pslst	*tmp;
-	
+
 	while (a->head)
 	{
 		tmp = a->head;
@@ -28,14 +28,14 @@ void	print_exit(t_stack *a, t_stack *b, int OK)
 		b->head = b->head->nxt;
 		free(tmp);
 	}
-	if (OK)
+	if (ok)
 		ft_putstr("OK\n");
-	if (!OK)
+	if (!ok)
 		ft_putstr("KO\n");
 	exit(1);
 }
 
-int	check_a(t_stack *a)
+int		check_a(t_stack *a)
 {
 	t_pslst	*tmp;
 
@@ -45,13 +45,13 @@ int	check_a(t_stack *a)
 		ft_printf("%d, ", tmp->n);
 		if (tmp->nxt->n < tmp->n)
 			return (0);
-		tmp = tmp->nxt; 
+		tmp = tmp->nxt;
 	}
-		ft_printf("%d, ", tmp->n);
+	ft_printf("%d, ", tmp->n);
 	return (1);
 }
 
-int main(int ac, char **av)
+int		main(int ac, char **av)
 {
 	t_stack	a;
 	t_stack	b;
