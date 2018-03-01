@@ -46,6 +46,34 @@ long	normal_median(t_stack *s)
 	return (m[2]);
 }
 
+int	get_true_median(t_stack *a)
+{
+	t_pslst *tmp;
+	int arr[a->ac + 1];
+	int	i;
+	int j[2];
+
+	tmp = a->head;
+	i = 0;
+	while (tmp != a->p[a->top])
+	{
+		arr[i++] = tmp->n;
+		tmp = tmp->nxt;
+	}
+	j[0] = -1;
+	while (j[0]++ < i)
+	{
+		j[1] = j[0];
+		while (++j[1] < i)
+			if (arr[j[0]] < arr[j[1]])
+			{
+				arr[a->ac] = arr[j[1]];
+				arr[j[1]] = arr[j[0]];
+				arr[j[0]] = arr[a->ac];
+			}
+	}
+	return (arr[i / 2]);
+}
 
 int	split_a(t_stack *a, t_stack *b, t_list **cmnd)
 {
@@ -58,12 +86,10 @@ int	split_a(t_stack *a, t_stack *b, t_list **cmnd)
 	tmp[0] = '\0';
 	count = get_count(a);
 	median = NO_MED;
-//	ft_intdebug(count, "count");
-	if (count <= 11 && count > 2)
+	if (count <= 6 && count > 2)
 		median = special_median_a(a);
-	else if (count > 11)
-		median = normal_median(a);
-//	ft_intdebug(median, "median");
+	else if (count > 6)
+		median = get_true_median(a);
 	if (median != NO_MED)
 		i = split_round_median_a(a, b, (int)median, tmp);
 	else
@@ -112,7 +138,7 @@ int	b_to_a(t_stack *a, t_stack *b, t_list **cmnd)
 	if (count <= 6 && count > 2)
 		median = special_median_b(b);
 	else if (count > 6)
-		median = normal_median(b);
+		median = get_true_median(b);
 	if (median != NO_MED)
 		i = split_round_median_b(a, b, (int)median, tmp);
 	else
@@ -177,6 +203,7 @@ int	main(int ac, char **av)
 	b.top = 0;
 	a.p[a.top] = NULL;
 	b.p[a.top] = NULL;
+//	simple_sort(&a, &b);
 //	print_stacks(a.head, b.head, "start");
 	cmnd = solver(&a, &b);
 	while (cmnd != NULL)
@@ -184,7 +211,6 @@ int	main(int ac, char **av)
 		ft_putstr((char *)cmnd->content);
 		cmnd = cmnd->next;
 	}
-	//print_stacks(a.head, b.head, "start");		
 }
 
 /*
