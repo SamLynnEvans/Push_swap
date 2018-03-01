@@ -6,7 +6,7 @@ LIB.A = libft.a
 
 CH_SRC_NAME = checker/main.c
 
-P_SRC_NAME = push_swap/main.c push_swap/a_functions.c push_swap/b_functions.c
+P_SRC_NAME = push_swap/main.c push_swap/a_functions.c push_swap/b_functions.c push_swap/solver.c
 
 CO_SRC_NAME = commands/commands.c
 

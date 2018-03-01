@@ -39,11 +39,20 @@ void				lst_addend_fast(int n, t_pslst **back);
 void				print_stacks(t_pslst *a, t_pslst *b, char *line);
 long				special_median_a(t_stack *a);
 int					deal_higher_a(t_stack *a, char *cmnds, int med, int count[3]);
-int					split_round_median_a(t_stack *a, t_stack *b, int med, char *cmnds);
-int					sort_a(t_stack *a, int count, char *tmp);
+void				split_round_median_a(t_stack *a, t_stack *b, int med, char *cmnds);
+void				sort_a(t_stack *a, int count, char *tmp);
 long				special_median_b(t_stack *b);
 int					deal_lower_b(t_stack *b, char *cmnds, int med, int count[3]);
-int					split_round_median_b(t_stack *a, t_stack *b, int med, char *cmnds);
-int					sort_b(t_stack *b, int count, char *tmp);
+void				split_round_median_b(t_stack *a, t_stack *b, int med, char *cmnds);
+void				sort_b(t_stack *b, int count, char *tmp);
+int					split_a(t_stack *a, t_stack *b, t_list **cmnd);
+int					push_b(t_stack *b, t_stack *a, int count, char *tmp);
+void				b_to_a(t_stack *a, t_stack *b, t_list **cmnd);
+int					sorted(t_stack *a);
+t_list 				*solver(t_stack *a, t_stack *b);
+int					get_count(t_stack *s);
+int					get_true_median(t_stack *a);
+void				error_exit(void);
+
 
 #endif

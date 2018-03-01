@@ -1,5 +1,11 @@
 #include "push_swap.h"
 
+void	error_exit(void)
+{
+	ft_putstr("error\n");
+	exit(1);
+}
+
 long	special_median_a(t_stack *a)
 {
 	t_pslst *tmp;
@@ -29,7 +35,7 @@ long	special_median_a(t_stack *a)
 	return ((!a->p[a->top]) ? arr[3] : arr[2]);
 }
 
-int		deal_higher_a(t_stack *a, char *cmnds, int med, int count[3])
+int	deal_higher_a(t_stack *a, char *cmnds, int med, int count[2])
 {
 	int skips;
 	t_pslst *tmp;
@@ -48,29 +54,24 @@ int		deal_higher_a(t_stack *a, char *cmnds, int med, int count[3])
 	{
 		rev_rotate(&a->head, &a->end);
 		ft_strcat(cmnds, "rra\n");
-		count[2] += 4;
 	}
 	return (1);
 }
 
-int		split_round_median_a(t_stack *a, t_stack *b, int med, char *cmnds)
+void	split_round_median_a(t_stack *a, t_stack *b, int med, char *cmnds)
 {
-	int		count[3];
+	int		count[2];
 
 	count[0] = 0;
 	count[1] = 0;
-	count[2] = 0;
 	if (b->head)
 		b->p[++(b->top)] = b->head;
 	while (a->head != a->p[a->top])
 	{
-//		if (a->head->n == med && count[1])
-//			return (-1);
 		if (a->head->n <= med)
 		{
 			push(&a->head, &b->head, &b->end);
 			ft_strcat(cmnds, "pb\n");
-			count[2] += 3;
 		}
 		else if (!(deal_higher_a(a, cmnds, med, count)))
 			break ;
@@ -79,61 +80,54 @@ int		split_round_median_a(t_stack *a, t_stack *b, int med, char *cmnds)
 	{
 		rotate(&a->head, &a->end);
 		ft_strcat(cmnds, "ra\n");
-		count[2] += 3;
 	}
-	return (count[2]);
 }
 
-int three_case(t_stack *a, char *tmp)
+static void	three_case(t_stack *a, char *tmp)
 {
 	int i;
 
 	i = 0;
 	if (a->head->n == a->head->nxt->nxt->n || a->head->nxt->n == a->head->nxt->nxt->n)
-		return (-1);
+		exit(1);
 	while (1)
 	{
 		if (a->head->nxt->n < a->head->nxt->nxt->n && a->head->n < a->head->nxt->nxt->n)
 		{
 			if (a->head->nxt->n < a->head->n)
-			{
-				
+			{		
 				swap(&a->head);
 				ft_strcat(tmp, "sa\n");
-				return (i + 3);
 			}
-			return (i);
+			return ;
 		}
 		if (a->head->nxt->n > a->head->nxt->nxt->n && a->head->nxt->n > a->head->n)
 		{
 			rotate(&a->head, &a->end);
 			ft_strcat(tmp, "ra\n");
-			i += 3;
 		}
 		else
 		{
 			rev_rotate(&a->head, &a->end);
 			ft_strcat(tmp, "rra\n");
-			i += 4;
 		}
 	}
 }
 
-int	sort_a(t_stack *a, int count, char *tmp)
+void	sort_a(t_stack *a, int count, char *tmp)
 {
 	if (count == 1)
-		return (0);
+		return ;
 	if (a->head->n == a->head->nxt->n)
-		return (-1);
+		error_exit();
 	if (count == 2)
 	{
 		if (a->head->nxt->n < a->head->n)
 		{
 			swap(&a->head);
 			ft_strcat(tmp, "sa\n");
-			return (3);
 		}
-		return (0);	
+		return ;
 	}
-	return (three_case(a, tmp));
+	three_case(a, tmp);
 }
