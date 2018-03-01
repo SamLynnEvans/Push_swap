@@ -1,11 +1,13 @@
 #ifndef PUSH_SWAP_H
-#define PUSH_SWAP_H
-#define NO_MED 2147483648
+# define PUSH_SWAP_H
+# define NO_MED 2147483648
+# define STRCMP ft_strcmp
 
-#include "libft.h"
-#include "ft_printf.h"
-#include "get_next_line.h"
-#include <limits.h>
+
+# include "libft.h"
+# include "ft_printf.h"
+# include "get_next_line.h"
+# include <limits.h>
 
 typedef struct		s_pslst
 {
@@ -53,6 +55,10 @@ t_list 				*solver(t_stack *a, t_stack *b);
 int					get_count(t_stack *s);
 int					get_true_median(t_stack *a);
 void				error_exit(void);
+
+void				rev_rotater(char *line, t_stack *a, t_stack *b);
+void				swapper(char *line, t_stack *a, t_stack *b);
+void				rotater(char *line, t_stack *a, t_stack *b);
 
 
 #endif

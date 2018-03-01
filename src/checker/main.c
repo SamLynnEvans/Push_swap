@@ -1,57 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/03/01 17:35:20 by slynn-ev          #+#    #+#             */
+/*   Updated: 2018/03/01 17:44:41 by slynn-ev         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void	error_exit(void)
+void	print_exit(t_stack *a, t_stack *b, int OK)
 {
-	ft_putstr("KO\n");
+	t_pslst	*tmp;
+	
+	while (a->head)
+	{
+		tmp = a->head;
+		a->head = a->head->nxt;
+		free(tmp);
+	}
+	while (b->head)
+	{
+		tmp = b->head;
+		b->head = b->head->nxt;
+		free(tmp);
+	}
+	if (OK)
+		ft_putstr("OK\n");
+	if (!OK)
+		ft_putstr("KO\n");
 	exit(1);
-}
-
-void	swapper(char *line, t_stack *a, t_stack *b)
-{
-	if (!ft_strcmp(line, "sa"))
-	{
-		swap(&a->head);
-		return ;
-	}
-	if (!ft_strcmp(line, "sb"))
-	{
-		swap(&b->head);
-		return ;
-	}
-	swap(&a->head);
-	swap(&b->head);
-}
-
-void	rotater(char *line, t_stack *a, t_stack *b)
-{
-	if (!ft_strcmp(line, "ra"))
-	{
-		rotate(&a->head, &a->end);
-		return ;
-	}
- 	if (!ft_strcmp(line, "rb"))
-	{
-		rotate(&b->head, &b->end);
-		return ;
-	}
-	rotate(&a->head, &a->end);
-	rotate(&b->head, &b->end);
-}
-
-void	rev_rotater(char *line, t_stack *a, t_stack *b)
-{
-	if (!ft_strcmp(line, "rra"))
-	{
-		rev_rotate(&a->head, &a->end);
-		return ;
-	}
- 	if (!ft_strcmp(line, "rrb"))
-	{
-		rev_rotate(&b->head, &b->end);
-		return ;
-	}
-	rev_rotate(&a->head, &a->end);
-	rev_rotate(&b->head, &b->end);
 }
 
 int	check_a(t_stack *a)
@@ -74,28 +55,26 @@ int main(int ac, char **av)
 {
 	t_stack	a;
 	t_stack	b;
-	char	*line;
+	char	*l;
 
 	build_stack(&a, &b, av, ac);
-	print_stacks(a.head, b.head, "start");
-	while (get_next_line(0, &line) > 0)
+	while (get_next_line(0, &l) > 0)
 	{
-		if (!ft_strcmp(line, "sa") || !ft_strcmp(line, "sb") || !ft_strcmp(line, "ss"))
-			swapper(line, &a, &b);
-		else if (!ft_strcmp(line, "pa"))
+		if (!STRCMP(l, "sa") || !STRCMP(l, "sb") || !STRCMP(l, "ss"))
+			swapper(l, &a, &b);
+		else if (!STRCMP(l, "pa"))
 			push(&b.head, &a.head, &a.end);
-		else if (!ft_strcmp(line, "pb"))
+		else if (!STRCMP(l, "pb"))
 			push(&a.head, &b.head, &b.end);
-		else if (!ft_strcmp(line, "ra") || !ft_strcmp(line, "rb") || !ft_strcmp(line, "rr"))
-		rotater(line, &a, &b);
-		else if (!ft_strcmp(line, "rra") || !ft_strcmp(line, "rrb") || !ft_strcmp(line, "rrr"))
-		rev_rotater(line, &a, &b);
+		else if (!STRCMP(l, "ra") || !STRCMP(l, "rb") || !STRCMP(l, "rr"))
+			rotater(l, &a, &b);
+		else if (!STRCMP(l, "rra") || !STRCMP(l, "rrb") || !STRCMP(l, "rrr"))
+			rev_rotater(l, &a, &b);
 		else
-			error_exit();
-		print_stacks(a.head, b.head, line); 
-		free(line);
+			print_exit(&a, &b, 0);
+		free(l);
 	}
 	if (!check_a(&a) || b.head)
-		error_exit();
-	ft_putstr("OK\n");
+		print_exit(&a, &b, 0);
+	print_exit(&a, &b, 1);
 }

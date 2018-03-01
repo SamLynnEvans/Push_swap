@@ -1,11 +1,5 @@
 #include "push_swap.h"
 
-void	error_exit(void)
-{
-	ft_putstr("error\n");
-	exit(1);
-}
-
 long	special_median_a(t_stack *a)
 {
 	t_pslst *tmp;

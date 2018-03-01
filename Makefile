@@ -4,11 +4,11 @@ LIB = libft
 
 LIB.A = libft.a
 
-CH_SRC_NAME = checker/main.c
+CH_SRC_NAME = checker/main.c checker/run_input_cmnds.c
 
-P_SRC_NAME = push_swap/main.c push_swap/a_functions.c push_swap/b_functions.c push_swap/solver.c
+P_SRC_NAME = push_swap/main.c push_swap/get_median.c push_swap/a_functions.c push_swap/b_functions.c push_swap/solver.c
 
-CO_SRC_NAME = commands/commands.c
+CO_SRC_NAME = shared/commands.c shared/build_stack.c
 
 SRC_PATH = src
 
@@ -49,7 +49,7 @@ $(OBJ_PATH)/%.o : $(SRC_PATH)/%.c
 	@mkdir -p $(OBJ_PATH)
 	@mkdir -p $(dir $(P_OBJ))
 	@mkdir -p $(dir $(CH_OBJ))
-	gcc -o $@ -c $< $(INCLUDES) $(FLAGS)
+	gcc -o $@ -c $< $(INCLUDES) $(FLAGS) -g
 
 clean :
 	rm -fr $(OBJ_PATH)

@@ -22,36 +22,6 @@ void	print_stacks(t_pslst *a, t_pslst *b, char *line)
 }	
 
 
-void	lst_addend_fast(int n, t_pslst **back)
-{
-	t_pslst *tmp;
-
-	if (*back == NULL)
-		return ;
-	tmp = malloc(sizeof(t_pslst));
-	tmp->n = n;
-	tmp->nxt = NULL;
-	(*back)->nxt = tmp;
-	tmp->prv = *back;
-	*back = tmp;
-}
-
-void	build_stack(t_stack *a, t_stack *b, char **av, int ac)
-{
-	int		i;
-
-	i = 1;
-	
-	a->head = malloc(sizeof(t_pslst));
-	a->head->n = ft_atoi(av[i++]);
-	a->head->prv = NULL;
-	a->end = a->head;
-	while (i < ac)
-		lst_addend_fast(ft_atoi(av[i++]), &a->end);
-	b->head = NULL;
-	b->end = NULL;
-} 
-
 void 	push(t_pslst **from, t_pslst **to, t_pslst **to_end)
 {
 	t_pslst *tmp;
