@@ -55,7 +55,7 @@ clean :
 	rm -fr $(OBJ_PATH)
 	make clean -C $(LIB)
 
-fclean :
+fclean : clean
 	rm -f $(NAME_C)
 	rm -f $(NAME_P)
 	make fclean -C $(LIB)

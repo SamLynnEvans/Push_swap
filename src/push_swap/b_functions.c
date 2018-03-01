@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 14:23:38 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/01 19:09:52 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/03/01 19:22:16 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 long	special_median_b(t_stack *b)
 {
 	t_pslst *tmp;
-	int arr[7];
-	int	i;
-	int j[2];
+	int		arr[7];
+	int		i;
+	int		j[2];
 
 	tmp = b->head;
 	i = 0;
@@ -43,7 +43,7 @@ long	special_median_b(t_stack *b)
 
 int		deal_lower_b(t_stack *b, char *cmnds, int med, int count[2])
 {
-	int skips;
+	int		skips;
 	t_pslst *tmp;
 
 	skips = 0;
@@ -87,7 +87,7 @@ void	split_round_median_b(t_stack *a, t_stack *b, int med, char *cmnds)
 	}
 }
 
-static void three_case(t_stack *a, char *tmp)
+void	three_caseb(t_stack *a, char *tmp)
 {
 	if (a->head->n == a->head->nxt->nxt->n
 	|| a->head->nxt->n == a->head->nxt->nxt->n)
@@ -108,7 +108,7 @@ static void three_case(t_stack *a, char *tmp)
 		}
 	}
 	if (!(a->head->nxt->n > a->head->n))
-				return ;
+		return ;
 	swap(&a->head);
 	ft_strcat(tmp, "sb\n");
 }
@@ -128,7 +128,7 @@ void	sort_b(t_stack *b, int count, char *tmp)
 			swap(&b->head);
 			ft_strcat(tmp, "sb\n");
 		}
-		return ;	
+		return ;
 	}
-	three_case(b, tmp);
+	three_caseb(b, tmp);
 }

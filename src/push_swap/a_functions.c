@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 18:58:34 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/01 19:07:38 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/03/01 19:11:50 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	three_case(t_stack *a, char *tmp)
 		}
 	}
 	if (!(a->head->nxt->n < a->head->n))
-		return ;	
+		return ;
 	swap(&a->head);
 	ft_strcat(tmp, "sa\n");
 }
