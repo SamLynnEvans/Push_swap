@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 12:35:28 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/01 12:46:20 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/03/01 19:34:25 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_list		*ft_lstnew_str(char *content)
 {
-	t_list *tmp;
+	t_list	*tmp;
 	int		i;
 	char	*arr;
 

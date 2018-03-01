@@ -6,21 +6,29 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 14:29:54 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/01 19:24:29 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/03/01 19:33:41 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	free_stack(t_stack *a)
+void	free_all(t_stack *a, t_list *cmnd)
 {
 	t_pslst *tmp;
+	t_list	*tmp_a;
 
 	while (a->head)
 	{
 		tmp = a->head;
 		a->head = a->head->nxt;
 		free(tmp);
+	}
+	while (cmnd)
+	{
+		tmp_a = cmnd;
+		free(cmnd->content);
+		cmnd = cmnd->next;
+		free(tmp_a);
 	}
 }
 
@@ -46,5 +54,5 @@ int		main(int ac, char **av)
 		ft_putstr((char *)cmnd->content);
 		cmnd = cmnd->next;
 	}
-	free_stack(&a);
+	free_all(&a, cmnd);
 }
