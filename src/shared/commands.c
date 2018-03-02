@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 18:27:55 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/01 18:28:33 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/03/02 12:46:15 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	swap(t_pslst **head)
 	(*head)->prv = NULL;
 }
 
-void	rev_rotate(t_pslst **head, t_pslst **end)
+void	rotate(t_pslst **head, t_pslst **end)
 {
 	if (*head == NULL || *end == NULL || (*head)->nxt == NULL)
 		return ;
@@ -78,7 +78,7 @@ void	rev_rotate(t_pslst **head, t_pslst **end)
 	(*end)->nxt = NULL;
 }
 
-void	rotate(t_pslst **head, t_pslst **end)
+void	rev_rotate(t_pslst **head, t_pslst **end)
 {
 	if (*head == NULL || *end == NULL || (*end)->prv == NULL)
 		return ;

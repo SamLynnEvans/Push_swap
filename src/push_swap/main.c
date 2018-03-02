@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 14:29:54 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/01 19:33:41 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/03/02 12:45:26 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	free_all(t_stack *a, t_list *cmnd)
 		cmnd = cmnd->next;
 		free(tmp_a);
 	}
+	free(a->p);
 }
 
 int		main(int ac, char **av)
@@ -54,5 +55,6 @@ int		main(int ac, char **av)
 		ft_putstr((char *)cmnd->content);
 		cmnd = cmnd->next;
 	}
+	free(b.p);
 	free_all(&a, cmnd);
 }

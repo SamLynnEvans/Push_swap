@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 17:35:20 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/01 18:32:27 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/03/02 12:49:39 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,10 @@ int		check_a(t_stack *a)
 	tmp = a->head;
 	while (tmp->nxt != NULL)
 	{
-		ft_printf("%d, ", tmp->n);
 		if (tmp->nxt->n < tmp->n)
 			return (0);
 		tmp = tmp->nxt;
 	}
-	ft_printf("%d, ", tmp->n);
 	return (1);
 }
 

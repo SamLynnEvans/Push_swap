@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 14:23:38 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/01 20:05:37 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/03/02 12:48:09 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ int		deal_lower_b(t_stack *b, char *cmnds, int med, int count[2])
 	count[0] += skips;
 	while (skips--)
 	{
-		rev_rotate(&b->head, &b->end);
-		ft_strcat(cmnds, "rrb\n");
+		rotate(&b->head, &b->end);
+		ft_strcat(cmnds, "rb\n");
 	}
 	return (1);
 }
@@ -82,8 +82,8 @@ void	split_round_median_b(t_stack *a, t_stack *b, int med, char *cmnds)
 	}
 	while (b->p[b->top] && --count[0] >= 0)
 	{
-		rotate(&b->head, &b->end);
-		ft_strcat(cmnds, "rb\n");
+		rev_rotate(&b->head, &b->end);
+		ft_strcat(cmnds, "rrb\n");
 	}
 }
 
@@ -95,13 +95,13 @@ void	three_caseb(t_stack *a, char *tmp)
 		if (a->head->nxt->n < a->head->nxt->nxt->n
 		&& a->head->nxt->n < a->head->n)
 		{
-			rotate(&a->head, &a->end);
-			ft_strcat(tmp, "rb\n");
+			rev_rotate(&a->head, &a->end);
+			ft_strcat(tmp, "rrb\n");
 		}
 		else
 		{
-			rev_rotate(&a->head, &a->end);
-			ft_strcat(tmp, "rrb\n");
+			rotate(&a->head, &a->end);
+			ft_strcat(tmp, "rb\n");
 		}
 	}
 	if (!(a->head->nxt->n > a->head->n))
@@ -118,7 +118,7 @@ void	sort_b(t_stack *b, int count, char *tmp)
 		return ;
 	if (count == 2)
 	{
-		if (b->head->nxt->n > b->head->n)
+		if (b->head->nxt && b->head->nxt->n > b->head->n)
 		{
 			swap(&b->head);
 			ft_strcat(tmp, "sb\n");

@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 18:58:34 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/01 20:05:11 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/03/02 12:47:29 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ int		deal_higher_a(t_stack *a, char *cmnds, int med, int *t_rewind)
 	*t_rewind = *t_rewind + skips;
 	while (skips--)
 	{
-		rev_rotate(&a->head, &a->end);
-		ft_strcat(cmnds, "rra\n");
+		rotate(&a->head, &a->end);
+		ft_strcat(cmnds, "ra\n");
 	}
 	return (1);
 }
@@ -83,8 +83,8 @@ void	split_round_median_a(t_stack *a, t_stack *b, int med, char *cmnds)
 	}
 	while (a->p[a->top] && --rewind >= 0)
 	{
-		rotate(&a->head, &a->end);
-		ft_strcat(cmnds, "ra\n");
+		rev_rotate(&a->head, &a->end);
+		ft_strcat(cmnds, "rra\n");
 	}
 }
 
@@ -96,13 +96,13 @@ void	three_case(t_stack *a, char *tmp)
 		if (a->head->nxt->n > a->head->nxt->nxt->n
 		&& a->head->nxt->n > a->head->n)
 		{
-			rotate(&a->head, &a->end);
-			ft_strcat(tmp, "ra\n");
+			rev_rotate(&a->head, &a->end);
+			ft_strcat(tmp, "rra\n");
 		}
 		else
 		{
-			rev_rotate(&a->head, &a->end);
-			ft_strcat(tmp, "rra\n");
+			rotate(&a->head, &a->end);
+			ft_strcat(tmp, "ra\n");
 		}
 	}
 	if (!(a->head->nxt->n < a->head->n))
