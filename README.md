@@ -5,28 +5,28 @@ The aim of push swap is to sort a stack of numbers using another stack in the le
 
 The stacks can be rotated, have their top two elements swapped, or be pushed onto each other, the full command list is as follows:
 
-Rotating commands
-RA - rotate stack A (send top number on stack to bottom)
-RB - rotate stack B (send top number on stack to bpttom)
-RR - rotate both stack A and B at the same time
-RRA - counter-rotate stack A (send bottom number of stack to top)
-RRB - counter-rotate stack B (send bottom number of stack to top)
-RRR - counter-rotate stack A and stack B at the same time
-
-Swapping commands
-SA - swap top two numbers at top of stack A
-SB - swap top two numbers at top of stack B
-
-Pushing commands
-PA - push top element from stack A onto stack B
-PB - push stack B
+Rotating commands<br/>
+RA - rotate stack A (send top number on stack to bottom)<br/>
+RB - rotate stack B (send top number on stack to bpttom)<br/>
+RR - rotate both stack A and B at the same time<br/>
+RRA - counter-rotate stack A (send bottom number of stack to top)<br/>
+RRB - counter-rotate stack B (send bottom number of stack to top)<br/>
+RRR - counter-rotate stack A and stack B at the same time<br/>
+<br/>
+Swapping commands<br/>
+SA - swap top two numbers at top of stack A<br/>
+SB - swap top two numbers at top of stack B<br/>
+<br/>
+Pushing commands<br/>
+PA - push top element from stack A onto stack B<br/>
+PB - push stack B<br/>
 
 <b>How to run the program</b>
 
 Push_swap usage:
-./push_swap list_of_space_seperated_numbers
+./push_swap list_of_numbers_given_as_parameters
 
-A list of numbers is entered as the first paramater and this is considered as the first stack, push_swap then prints the list of commands required to sort this stack.
+A list of numbers is entered as the parameters and these make up stack A (with the order of their input maintained), push_swap then prints the list of commands required to sort this stack.
 
 To check the commands we use the checker, which could be called in this manner:
 
@@ -38,7 +38,7 @@ The full pdf for the project can be seen here.
 
 <b>The algortihm</b>
 
-While the aim of the project was to introduce students to complexity, the project did not actually favour algorithms with lowest complexity. Given that highest marks were achieved by using the least amount of commands, slower algorithms that read the data more times were favourable to algortihms optimised for speed or least passes over the numbers. For this reason, computationally slower processes (like finding the true median for each split in quick sort) were actually favourable to the usual form of estimation.
+While the aim of the project was to introduce students to complexity, the project did not actually favour algorithms with lowest complexity. Given that highest marks were achieved by using the least amount of commands, slower algorithms that read the data more times could be more precise than algortihms optimised for speed or least passes over the numbers. For this reason, computationally slower processes like finding the true median for each split in quick sort achieved better results.
 
 In my implementation, I repeatedy split stack A around the true median, putting the lower numbers onto stack B, and maintaining the higher numbers in stack A. Partitions were recorded in stack B each time this process occurred as so: 
 
@@ -63,7 +63,7 @@ If three or less numbers were pushed back on to stack A, these numbers would be 
 
 If more than three numbers were pushed from B to A, stack A would then repeat the process at beginning, repeatedly splitting around a median of all the numbers after the last partition in A, maintaining the higher values and pushing the lower values onto B.
 
-This process would be repeated until the stack A was sorted.
+The whole above process would be repeated until stack A was sorted.
 
 While many projects implemented a similar algortihm recursively, I employed a faster and less computationally expensive method by computing the problem iteratively. Two additional stacks kept a record of the position of the partitions, and allowed the algorithm to know when to stop pushing onto stack B or stack A, and from which point to calculate the medians. I based this implementation on an idea I read about here.
 
