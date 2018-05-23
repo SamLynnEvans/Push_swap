@@ -42,20 +42,21 @@ While the aim of the project was to introduce students to complexity, the projec
 
 In my implementation, I repeatedy split stack A around the true median, putting the lower numbers onto stack B, and maintaining the higher numbers in stack A. Partitions were recorded in stack B each time this process occurred as so: 
 
-Start
-stack A: 1 7 9 4 10 3 2 11 25      (median - 7)
-Stack B:
+Start<br/>
+stack A: 1 7 9 4 10 3 2 11 25  (median = 7)<br/>
+Stack B:<br/>
 
 First split:
 
-stack A: 9 10 11 25 
+stack A: 9 10 11 25 <br/>
 Stack B: 2 3 4 7 1
 
 Second split:
 
-stack A: 25 11 10
-stack B: 2 3 4 7 1 | 9
-              (partition)
+stack A: 25 11 10<br/>
+stack B: 2 3 4 7 1 | 9<br/>
+ 
+| = partition
 
 Once Stack A was reduced to three or less numbers, it was sorted. Stack B would then find the median of the numbers up until the last partition in stack B, and push the higher values onto stack A until it reached the next partition in stack B. 
 
