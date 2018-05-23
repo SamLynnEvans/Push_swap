@@ -7,7 +7,7 @@ The stacks can be rotated, have their top two elements swapped, or be pushed ont
 
 Rotating commands<br/>
 RA - rotate stack A (send top number on stack to bottom)<br/>
-RB - rotate stack B (send top number on stack to bpttom)<br/>
+RB - rotate stack B (send top number on stack to bottom)<br/>
 RR - rotate both stack A and B at the same time<br/>
 RRA - counter-rotate stack A (send bottom number of stack to top)<br/>
 RRB - counter-rotate stack B (send bottom number of stack to top)<br/>
@@ -34,7 +34,7 @@ To check the commands we use the checker, which could be called in this manner:
 
 The checker prints OK if the first stack is sorted and the second stack empty, and KO if anything else.
 
-The full pdf for the project can be seen here.
+The full pdf for the project can be seen <a href="https://github.com/SamLynnEvans/Push_swap/blob/master/push_swap.pdf">here</a>.
 
 <b>The algortihm</b>
 
